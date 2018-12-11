@@ -80,7 +80,6 @@ class Exchange {
     );
 
     public static $exchanges = array (
-        '_1btcxe',
         'acx',
         'allcoin',
         'anxpro',
@@ -208,10 +207,12 @@ class Exchange {
         'virwox',
         'wex',
         'xbtce',
+        'xs2',
         'yobit',
         'yunbi',
         'zaif',
         'zb',
+        '_1btcxe',
     );
 
     public static function split ($string, $delimiters = array (' ')) {
