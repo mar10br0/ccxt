@@ -312,7 +312,6 @@ declare module 'ccxt' {
 
     /* tslint:disable */
 
-    export class _1btcxe extends Exchange {}
     export class acx extends Exchange {}
     export class allcoin extends okcoinusd {}
     export class anxpro extends Exchange {}
@@ -440,10 +439,12 @@ declare module 'ccxt' {
     export class virwox extends Exchange {}
     export class wex extends liqui {}
     export class xbtce extends Exchange {}
+    export class xs2 extends Exchange {}
     export class yobit extends liqui {}
     export class yunbi extends acx {}
     export class zaif extends Exchange {}
     export class zb extends Exchange {}
+    export class _1btcxe extends Exchange {}
 
     /* tslint:enable */
 
