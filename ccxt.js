@@ -164,7 +164,6 @@ const exchanges = {
     'whitebit':                require ('./js/whitebit.js'),
     'xbtce':                   require ('./js/xbtce.js'),
     'xena':                    require ('./js/xena.js'),
-    'xs2':                     require ('./js/xs2.js'),
     'yobit':                   require ('./js/yobit.js'),
     'zaif':                    require ('./js/zaif.js'),
     'zb':                      require ('./js/zb.js'),
