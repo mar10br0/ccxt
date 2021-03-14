@@ -6,6 +6,9 @@ include $root . '/ccxt.php';
 
 date_default_timezone_set ('UTC');
 
+echo 'PHP v' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION . "\n";
+echo 'CCXT v' . \ccxt\Exchange::VERSION . "\n";
+
 if (count ($argv) > 2) {
 
     $id = $argv[1];
@@ -22,7 +25,7 @@ if (count ($argv) > 2) {
         $keys_file = file_exists ($keys_local) ? $keys_local : $keys_global;
 
         $config = json_decode (file_get_contents ($keys_file), true);
-		$settings = array_key_exists ($id, $config) ? $config[$id] : array ();
+        $settings = array_key_exists ($id, $config) ? $config[$id] : array ();
         $config = array_merge ($settings, array (
             'verbose' => $verbose, // set to true for debugging
         ));
@@ -32,9 +35,9 @@ if (count ($argv) > 2) {
         $exchange = new $exchange ($config);
 
         $args = array_map (function ($arg) {
-			global $exchange;
+            global $exchange;
             if ($arg[0] === '{' || $arg[0] === '[')
-				return json_decode ($arg, true);
+                return json_decode ($arg, true);
             if ($arg === 'NULL' || $arg === 'null')
                 return null;
             if (preg_match ('/^[+-]?[0-9]+$/', $arg))
@@ -49,11 +52,11 @@ if (count ($argv) > 2) {
 
         $exchange->load_markets ();
 
-        if (method_exists ($exchange, $member)) {
+        // if (method_exists ($exchange, $member)) {
 
             try {
 
-                echo $exchange->id . '->' . $member . ' (' . implode (', ', $args) . ")\n";
+                echo $exchange->id . '->' . $member . ' (' . @implode (', ', $args) . ")\n";
 
                 $result = call_user_func_array (array ($exchange, $member), $args);
 
@@ -66,16 +69,21 @@ if (count ($argv) > 2) {
             } catch (\ccxt\ExchangeError $e) {
 
                 echo get_class ($e) . ': ' . $e->getMessage () . "\n";
+
+            } catch (Exception $e) {
+
+                echo get_class ($e) . ': ' . $e->getMessage () . "\n";
+
+                if (property_exists ($exchange, $member)) {
+
+                    echo print_r ($exchange->$member, true) . "\n";
+
+                } else {
+
+                    echo $exchange->id . '->' . $member . ": no such property\n";
+                }
             }
-
-        } else if (property_exists ($exchange, $member)) {
-
-            echo print_r ($exchange->$member, true) . "\n";
-
-        } else {
-
-            echo $exchange->id . '->' . $member . ": no such property\n";
-        }
+        // }
 
     } else {
 

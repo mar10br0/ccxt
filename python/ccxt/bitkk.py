@@ -6,7 +6,7 @@
 from ccxt.zb import zb
 
 
-class bitkk (zb):
+class bitkk(zb):
 
     def describe(self):
         return self.deep_extend(super(bitkk, self).describe(), {
@@ -21,5 +21,8 @@ class bitkk (zb):
                 'www': 'https://www.bitkk.com',
                 'doc': 'https://www.bitkk.com/i/developer',
                 'fees': 'https://www.bitkk.com/i/rate',
+            },
+            'commonCurrencies': {
+                'BCH': 'BCHOLD',
             },
         })
